@@ -9,27 +9,35 @@ class Auth {
     return fetch(`${this.#url}/api/${url}`, data);
   }
 
-  async signIn(username: string, password: string): Promise<number> {
-    return (
-      await this.#fetch("signin", {
+  async signIn(username: string, password: string) {
+    return new Promise((res, rej) => {
+      this.#fetch("signin", {
         method: "POST",
         body: JSON.stringify({ username, password }),
       })
-    ).status;
+        .then((d) => res(d))
+        .catch((e) => rej(e));
+    });
   }
 
-  async signUp(username: string, password: string): Promise<number> {
-    return (
-      await this.#fetch("signup", {
+  async signUp(username: string, password: string) {
+    return new Promise((res, rej) => {
+      this.#fetch("signup", {
         method: "POST",
         body: JSON.stringify({ username, password }),
       })
-    ).status;
+        .then((d) => res(d))
+        .catch((e) => rej(e));
+    });
   }
 
   async logout() {
-    await this.#fetch("logout", {
-      method: "POST",
+    return new Promise((res, rej) => {
+      this.#fetch("logout", {
+        method: "POST",
+      })
+        .then((d) => res(d))
+        .catch((e) => rej(e));
     });
   }
 }

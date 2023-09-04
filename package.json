@@ -1,12 +1,12 @@
 {
   "name": "dinobase",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Simple dinobase sdk",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "publish": "npm run build"
+    "publish": "pnpm run build"
   },
   "author": "ddtt786",
   "keywords": [
