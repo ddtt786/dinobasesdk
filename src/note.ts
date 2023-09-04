@@ -1,3 +1,5 @@
+import { ValidateError } from "./errors";
+
 interface SearchOptions {
   value?: string;
   min?: number | string;
@@ -22,7 +24,11 @@ class Note {
   }
 
   async getOne(uuid: string): Promise<Data> {
-    return await (await this.#fetch(`sheet/${this.#note}/${uuid}`)).json();
+    return new Promise((res, rej) => {
+      this.#fetch(`sheet/${this.#note}/${uuid}`)
+        .then(async (d) => res(await d.json()))
+        .catch((e) => rej(e));
+    });
   }
 
   async search(
@@ -36,32 +42,44 @@ class Note {
     if (options.limit) url.searchParams.append("limit", String(options.limit));
     if (options.cursor) url.searchParams.append("cursor", options.cursor);
 
-    return await (await fetch(url)).json();
+    return new Promise((res, rej) => {
+      fetch(url)
+        .then(async (d) => res(await d.json()))
+        .catch((e) => rej(e));
+    });
   }
 
   async insert(data: Data): Promise<string> {
-    return await (
-      await this.#fetch(`createsheet/${this.#note}`, {
+    return new Promise((res, rej) => {
+      this.#fetch(`createsheet/${this.#note}`, {
         method: "POST",
         body: JSON.stringify(data),
       })
-    ).text();
+        .then(async (d) => res(await d.text()))
+        .catch((e) => rej(e));
+    });
   }
 
-  async update(uuid: string, data: Data): Promise<number> {
-    return (
-      await this.#fetch(`sheet/${this.#note}/${uuid}`, {
+  async update(uuid: string, data: Data) {
+    return new Promise((res, rej) => {
+      this.#fetch(`sheet/${this.#note}/${uuid}`, {
         method: "PATCH",
         body: JSON.stringify(data),
       })
-    ).status;
+        .then((d) => res(d))
+        .catch((e) => rej(e));
+    });
   }
 
-  async delete(uuid: string): Promise<number> {
-    return (
-      await this.#fetch(`sheet/${this.#note}/${uuid}`, {
+  async delete(uuid: string) {
+    return new Promise((res, rej) => {
+      this.#fetch(`sheet/${this.#note}/${uuid}`, {
         method: "DELETE",
       })
-    ).status;
+        .then((d) => res(d))
+        .catch((e) => rej(e));
+    });
   }
 }
+
+export { Note };

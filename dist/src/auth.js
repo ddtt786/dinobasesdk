@@ -1,4 +1,3 @@
-"use strict";
 class Auth {
     #url;
     constructor(url) {
@@ -25,3 +24,4 @@ class Auth {
         });
     }
 }
+export { Auth };

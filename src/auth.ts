@@ -33,3 +33,5 @@ class Auth {
     });
   }
 }
+
+export { Auth };

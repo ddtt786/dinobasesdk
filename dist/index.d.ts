@@ -1,3 +1,5 @@
+import { Auth } from "./src/auth";
+import { Note } from "./src/note";
 declare class Denobase {
     url: string;
     auth: Auth;

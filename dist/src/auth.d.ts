@@ -5,3 +5,4 @@ declare class Auth {
     signUp(username: string, password: string): Promise<number>;
     logout(): Promise<void>;
 }
+export { Auth };

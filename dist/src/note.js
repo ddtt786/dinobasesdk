@@ -1,4 +1,3 @@
-"use strict";
 class Note {
     #url;
     #note;
@@ -10,7 +9,11 @@ class Note {
         return fetch(`${this.#url}/api/${url}`, data);
     }
     async getOne(uuid) {
-        return await (await this.#fetch(`sheet/${this.#note}/${uuid}`)).json();
+        return new Promise((res, rej) => {
+            this.#fetch(`sheet/${this.#note}/${uuid}`)
+                .then(async (d) => res(await d.json()))
+                .catch((e) => rej(e));
+        });
     }
     async search(column, options) {
         const url = new URL(`${this.#url}search/${column}`);
@@ -24,23 +27,40 @@ class Note {
             url.searchParams.append("limit", String(options.limit));
         if (options.cursor)
             url.searchParams.append("cursor", options.cursor);
-        return await (await fetch(url)).json();
+        return new Promise((res, rej) => {
+            fetch(url)
+                .then(async (d) => res(await d.json()))
+                .catch((e) => rej(e));
+        });
     }
     async insert(data) {
-        return await (await this.#fetch(`createsheet/${this.#note}`, {
-            method: "POST",
-            body: JSON.stringify(data),
-        })).text();
+        return new Promise((res, rej) => {
+            this.#fetch(`createsheet/${this.#note}`, {
+                method: "POST",
+                body: JSON.stringify(data),
+            })
+                .then(async (d) => res(await d.text()))
+                .catch((e) => rej(e));
+        });
     }
     async update(uuid, data) {
-        return (await this.#fetch(`sheet/${this.#note}/${uuid}`, {
-            method: "PATCH",
-            body: JSON.stringify(data),
-        })).status;
+        return new Promise((res, rej) => {
+            this.#fetch(`sheet/${this.#note}/${uuid}`, {
+                method: "PATCH",
+                body: JSON.stringify(data),
+            })
+                .then((d) => res(d))
+                .catch((e) => rej(e));
+        });
     }
     async delete(uuid) {
-        return (await this.#fetch(`sheet/${this.#note}/${uuid}`, {
-            method: "DELETE",
-        })).status;
+        return new Promise((res, rej) => {
+            this.#fetch(`sheet/${this.#note}/${uuid}`, {
+                method: "DELETE",
+            })
+                .then((d) => res(d))
+                .catch((e) => rej(e));
+        });
     }
 }
+export { Note };

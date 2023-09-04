@@ -1,3 +1,5 @@
+import { Auth } from "./src/auth";
+import { Note } from "./src/note";
 class Denobase {
     url;
     auth;
