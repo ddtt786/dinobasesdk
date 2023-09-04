@@ -1,6 +1,6 @@
 import { Auth } from "./src/auth";
 import { Note } from "./src/note";
-class Denobase {
+class Dinobase {
     url;
     auth;
     constructor(url) {
@@ -11,7 +11,7 @@ class Denobase {
         return new Note(this.url, name);
     }
 }
-function denobase(url) {
-    return new Denobase(url);
+function dinobase(url) {
+    return new Dinobase(url);
 }
-export { denobase };
+export { dinobase };
