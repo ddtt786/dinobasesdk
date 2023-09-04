@@ -16,7 +16,7 @@ declare class Note {
         data: string[];
         cursor?: string;
     }>;
-    insert(note: string, data: Data): Promise<number>;
+    insert(data: Data): Promise<string>;
     update(uuid: string, data: Data): Promise<number>;
     delete(uuid: string): Promise<number>;
 }

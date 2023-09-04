@@ -26,11 +26,11 @@ class Note {
             url.searchParams.append("cursor", options.cursor);
         return await (await fetch(url)).json();
     }
-    async insert(note, data) {
-        return await (await this.#fetch(`createsheet/${note}`, {
+    async insert(data) {
+        return await (await this.#fetch(`createsheet/${this.#note}`, {
             method: "POST",
             body: JSON.stringify(data),
-        })).status;
+        })).text();
     }
     async update(uuid, data) {
         return (await this.#fetch(`sheet/${this.#note}/${uuid}`, {
