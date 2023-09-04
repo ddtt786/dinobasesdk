@@ -1,0 +1,28 @@
+{
+  "name": "dinobase",
+  "version": "0.2.0",
+  "description": "Simple dinobase sdk",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "publish": "npm run build"
+  },
+  "author": "ddtt786",
+  "keywords": [
+    "router",
+    "history"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ddtt786/dinobasesdk.git"
+  },
+  "license": "MIT",
+  "files": [
+    "dist/**/*"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.3.2",
+    "typescript": "^5.1.6"
+  }
+}
