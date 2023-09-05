@@ -33,7 +33,7 @@ class Note {
     column: string,
     options: SearchOptions
   ): Promise<{ data: string[]; cursor?: string }> {
-    const url = new URL(`${this.#url}/api/search/${column}`);
+    const url = new URL(`${this.#url}/api/search/${this.#note}/${column}`);
     if (options.value) url.searchParams.append("value", options.value);
     if (options.min) url.searchParams.append("min", String(options.min));
     if (options.max) url.searchParams.append("max", String(options.max));

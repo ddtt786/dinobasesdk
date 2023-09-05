@@ -16,7 +16,7 @@ class Note {
         });
     }
     async search(column, options) {
-        const url = new URL(`${this.#url}/api/search/${column}`);
+        const url = new URL(`${this.#url}/api/search/${this.#note}/${column}`);
         if (options.value)
             url.searchParams.append("value", options.value);
         if (options.min)
