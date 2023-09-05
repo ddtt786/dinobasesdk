@@ -19,5 +19,6 @@ declare class Note {
     insert(data: Data): Promise<string>;
     update(uuid: string, data: Data): Promise<unknown>;
     delete(uuid: string): Promise<unknown>;
+    list(): Promise<unknown>;
 }
 export { Note };

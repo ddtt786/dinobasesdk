@@ -1,5 +1,6 @@
 class Auth {
   #url: string;
+  uuid: string = "";
 
   constructor(url: string) {
     this.#url = url;
@@ -15,7 +16,11 @@ class Auth {
         method: "POST",
         body: JSON.stringify({ username, password }),
       })
-        .then((d) => res(d))
+        .then(async (d) => {
+          const uuid = await d.text();
+          this.uuid = uuid;
+          res(uuid);
+        })
         .catch((e) => rej(e));
     });
   }
@@ -31,13 +36,13 @@ class Auth {
     });
   }
 
-  async logout() {
+  async logout(): Promise<number> {
     return new Promise((res, rej) => {
       this.#fetch("logout", {
         method: "POST",
       })
-        .then((d) => res(d))
-        .catch((e) => rej(e));
+        .then((d) => res(d.status))
+        .catch((e) => rej(e.status));
     });
   }
 }

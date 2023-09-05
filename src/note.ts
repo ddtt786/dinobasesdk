@@ -1,5 +1,3 @@
-import { ValidateError } from "./errors";
-
 interface SearchOptions {
   value?: string;
   min?: number | string;
@@ -76,6 +74,14 @@ class Note {
       this.#fetch(`sheet/${this.#note}/${uuid}`, {
         method: "DELETE",
       })
+        .then((d) => res(d))
+        .catch((e) => rej(e));
+    });
+  }
+
+  async list() {
+    return new Promise((res, rej) => {
+      this.#fetch(`notelist`)
         .then((d) => res(d))
         .catch((e) => rej(e));
     });
