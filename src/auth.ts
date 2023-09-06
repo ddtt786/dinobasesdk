@@ -41,7 +41,10 @@ class Auth {
       this.#fetch("logout", {
         method: "POST",
       })
-        .then((d) => res(d.status))
+        .then((d) => {
+          this.uuid = "";
+          res(d.status);
+        })
         .catch((e) => rej(e.status));
     });
   }
