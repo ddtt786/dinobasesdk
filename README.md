@@ -11,7 +11,7 @@
 ```
 
 ```js
-import { dinobase } from "https://esm.sh/dinobase@0.1.1";
+import { dinobase } from "https://esm.sh/dinobase";
 
 export const dinobase = dinobase("http://localhost:3000");
 ```
