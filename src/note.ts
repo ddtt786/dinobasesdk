@@ -49,7 +49,7 @@ class Note {
 
   async insert(data: Data): Promise<string> {
     return new Promise((res, rej) => {
-      this.#fetch(`createsheet/${this.#note}`, {
+      this.#fetch(`note/${this.#note}`, {
         method: "POST",
         body: JSON.stringify(data),
       })
