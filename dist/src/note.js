@@ -35,7 +35,7 @@ class Note {
     }
     async insert(data) {
         return new Promise((res, rej) => {
-            this.#fetch(`note/${this.#note}`, {
+            this.#fetch(`sheet/${this.#note}`, {
                 method: "POST",
                 body: JSON.stringify(data),
             })
